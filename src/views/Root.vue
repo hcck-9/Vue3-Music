@@ -7,7 +7,11 @@
       <div class="h-14">
         <Header />
       </div>
-      <div class="flex-1 overflow-hidden">main</div>
+      <div class="flex-1 overflow-hidden">
+        <el-scrollbar>
+          <div class="container mx-auto">123</div>
+        </el-scrollbar>
+      </div>
       <div class="h-20">
         <Footer />
       </div>
