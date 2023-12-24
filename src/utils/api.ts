@@ -2,6 +2,9 @@ import instance from '@/utils/http'
 
 import type { SearchHotDetail, SearchSuggest } from '@/models/search'
 import { UserProfile } from '@/models/user'
+import { SongUrl } from '@/models/songUrl'
+import { Song } from '@/models/song'
+import { Banner } from '@/models/banner'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -13,15 +16,33 @@ export async function useLogin(phone: string, password: string) {
   }>('login/cellphone', { phone: phone, password: password })
 }
 
+// 获取歌曲地址
+export async function useSongUrl(id: number) {
+  const { data } = await instance.get<{ data: SongUrl[] }>('/song/url', { id: id })
+  return data.first()
+}
+
+// 获取歌曲详情
+export async function useSongDetail(id: number) {
+  const { songs } = await instance.get<{ songs: Song[] }>('/song/detail', { ids: id })
+  return songs.first()
+}
+
+// 获取轮播图 banner
+export async function useBanner() {
+  const { banners } = await instance.get<{ banners: Banner[] }>('/banner', { type: 1 })
+  return banners
+}
+
 // 获取热门推荐歌曲
 export async function useSearchHotDetail() {
-  const { data } = await instance.get<{ data: SearchHotDetail[] }>('search/hot/detail')
+  const { data } = await instance.get<{ data: SearchHotDetail[] }>('/search/hot/detail')
   return data
 }
 
 // 根据关键词搜索歌曲
 export async function useSearchSuggest(keywords: string) {
-  const { result } = await instance.get<{ result: SearchSuggest }>('search/suggest', {
+  const { result } = await instance.get<{ result: SearchSuggest }>('/search/suggest', {
     keywords: keywords
   })
   return result

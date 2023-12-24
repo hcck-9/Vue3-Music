@@ -9,7 +9,9 @@
       </div>
       <div class="flex-1 overflow-hidden">
         <el-scrollbar>
-          <div class="container mx-auto">123</div>
+          <div class="container mx-auto">
+            <router-view></router-view>
+          </div>
         </el-scrollbar>
       </div>
       <div class="h-20">
@@ -17,12 +19,14 @@
       </div>
     </div>
   </div>
+  <PlayList />
 </template>
 
 <script setup lang="ts">
 import Header from '@/components/layout/header/Header.vue'
 import Footer from '@/components/layout/footer/Footer.vue'
 import Menu from '@/components/layout/menu/Menu.vue'
+import PlayList from '@/components/layout/playList/PlayList.vue'
 </script>
 
 <style scoped lang="scss"></style>

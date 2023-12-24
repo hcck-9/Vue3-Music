@@ -32,7 +32,7 @@ const iconSize = 22
 const mode = ref(false)
 
 const changeThemeMode = () => {
-  window.document.documentElement.setAttribute('data-theme', mode.value ? 'dark' : 'light')
+  window.document.documentElement.setAttribute('class', mode.value ? 'dark' : 'light')
 
   mode.value = !mode.value
 }

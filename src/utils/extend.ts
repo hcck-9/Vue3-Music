@@ -24,6 +24,14 @@ declare global {
      */
     chunk<T>(this: T[], size: number): T[][]
   }
+  interface String {
+    /**
+     * 转换成int类型
+     */
+    toInt(this: string): number
+
+    trimEnd(this: string, chars?: string): string
+  }
 
   interface Number {
     // 时间转化
@@ -46,6 +54,14 @@ Array.prototype.sampleSize = function <T>(this: T[], size: number): T[] {
 }
 Array.prototype.chunk = function <T>(this: T[], size: number): T[][] {
   return chunk<T>(this, size) as T[][]
+}
+
+String.prototype.toInt = function (this: string): number {
+  return parseInt(this)
+}
+
+String.prototype.trimEnd = function (this: string, chars: string = ' '): string {
+  return trimEnd(this, chars)
 }
 
 Number.prototype.toDate = function (this: number, format: string = 'YYYY-MM-DD') {
