@@ -2,7 +2,7 @@
   <div class="flex player-song">
     <img class="w-11 h-11 rounded" :src="song.al?.picUrl || OpticalDisk" alt="" />
     <div class="ml-2 text-xs flex flex-col justify-between">
-      <div>
+      <div class="flex justify-between items-center">
         <div
           v-if="songUrl.freeTrialInfo?.end > 0"
           class="bg-red-500 text-xs text-white rounded px-0.5 scale-75"

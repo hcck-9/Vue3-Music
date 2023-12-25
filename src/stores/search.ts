@@ -18,6 +18,16 @@ export const useSearchStore = defineStore('search', {
   actions: {
     async suggest() {
       this.suggestData = await useSearchSuggest(this.searchKeyword)
+      if (JSON.stringify(this.suggestData) === '{}') {
+        this.showSearchView = false
+      }
+    },
+    handleFocus() {
+      if (!this.showHot && JSON.stringify(this.suggestData) === '{}') {
+        this.showSearchView = false
+      } else {
+        this.showSearchView = true
+      }
     }
   }
 })

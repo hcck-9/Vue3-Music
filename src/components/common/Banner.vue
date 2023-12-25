@@ -1,7 +1,7 @@
 <template>
   <Swiper slides-per-group-auto slides-per-view="auto" :grab-cursor="true">
     <SwiperSlide v-for="banner in banners" :key="banner.bannerId">
-      <img :src="banner.pic" class="banner-image" />
+      <img :src="banner.pic" class="banner-image" @click="onClick(banner)" />
     </SwiperSlide>
   </Swiper>
 </template>
@@ -23,6 +23,12 @@ onMounted(async () => {
 })
 
 const { play } = usePlayerStore()
+
+const onClick = (banner: Banner) => {
+  if (banner.targetType === 1) {
+    play(banner.targetId)
+  }
+}
 </script>
 
 <style scoped lang="scss">

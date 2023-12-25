@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Banner: typeof import('./src/components/common/Banner.vue')['default']
     Bannner: typeof import('./src/components/common/Bannner.vue')['default']
+    CoverPlay: typeof import('./src/components/common/CoverPlay.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -39,6 +40,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchPop: typeof import('./src/components/layout/header/SearchPop.vue')['default']
     SearchSuggest: typeof import('./src/components/layout/header/SearchSuggest.vue')['default']
+    Title: typeof import('./src/components/common/Title.vue')['default']
     UserInfo: typeof import('./src/components/layout/header/UserInfo.vue')['default']
   }
 }

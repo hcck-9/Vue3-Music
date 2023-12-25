@@ -5,6 +5,7 @@ import { UserProfile } from '@/models/user'
 import { SongUrl } from '@/models/songUrl'
 import { Song } from '@/models/song'
 import { Banner } from '@/models/banner'
+import { Personalized, PersonalizedMv, PersonalizedNewSong } from '@/models/personalized'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -45,5 +46,23 @@ export async function useSearchSuggest(keywords: string) {
   const { result } = await instance.get<{ result: SearchSuggest }>('/search/suggest', {
     keywords: keywords
   })
+  return result
+}
+
+// 获取专属歌单歌曲
+export async function usePersonalized() {
+  const { result } = await instance.get<{ result: Personalized[] }>('/personalized')
+  return result
+}
+
+// 获取推荐新音乐歌曲
+export async function usePersonalizedNewSong() {
+  const { result } = await instance.get<{ result: PersonalizedNewSong[] }>('/personalized/newsong')
+  return result
+}
+
+// 获取推荐MV
+export async function usePersonalizedMv() {
+  const { result } = await instance.get<{ result: PersonalizedMv[] }>('/personalized/mv')
   return result
 }

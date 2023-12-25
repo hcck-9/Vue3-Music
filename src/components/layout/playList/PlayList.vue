@@ -1,6 +1,6 @@
 <template>
   <el-drawer v-model="showPlayList" :with-header="false" size="320px" class="play-list">
-    <div class="h-screen flex flex-col">
+    <div class="h-screen flex flex-col overflow-hidden">
       <div class="p-2.5 flex-shrink-0">
         <div class="text-xl">播放列表</div>
         <div class="text-xs mt-1 flex justify-between items-center">
@@ -38,10 +38,11 @@ const { showPlayList, playListCount, playList, id } = storeToRefs(usePlayerStore
 const { play, clearPlayList } = usePlayerStore()
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .play-list {
   .el-drawer__body {
     padding: 0;
+    margin: 0;
   }
 }
 </style>

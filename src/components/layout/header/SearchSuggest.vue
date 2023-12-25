@@ -6,6 +6,7 @@
       v-for="song in suggestData.songs"
       :key="song.id"
       class="py-1.5 px-2.5 hover-bg-main text-xs cursor-pointer"
+      @click="play(song.id)"
     >
       <span class="text-emerald-500">{{ song.name }}</span>
       <span class="pl-1"> - {{ song.artists.first()?.name }}</span>
@@ -43,8 +44,26 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '@/stores/search'
+import { useRouter } from 'vue-router'
+import { usePlayerStore } from '@/stores/player'
 
 const { suggestData, showSearchView } = storeToRefs(useSearchStore())
+
+const { play } = usePlayerStore()
+
+const router = useRouter()
+const routerPush = (name: string, id: number) => {
+  router
+    .push({
+      name: name,
+      query: {
+        id: id
+      }
+    })
+    .then(() => {
+      showSearchView.value = false
+    })
+}
 
 const getTitle = (name: string) => {
   switch (name) {

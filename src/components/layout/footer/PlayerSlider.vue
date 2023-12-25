@@ -1,6 +1,12 @@
 <template>
   <div class="player-slider">
-    <el-slider v-model="currentTime" :max="duration" :show-tooltip="false" />
+    <el-slider
+      v-model="currentTime"
+      :max="duration"
+      :show-tooltip="false"
+      @change="onSliderChange"
+      @input="onSliderInput"
+    />
   </div>
 </template>
 
@@ -9,6 +15,7 @@ import { usePlayerStore } from '@/stores/player'
 import { toRefs } from 'vue'
 
 const { duration, currentTime } = toRefs(usePlayerStore())
+const { onSliderChange, onSliderInput } = usePlayerStore()
 </script>
 
 <style lang="scss">

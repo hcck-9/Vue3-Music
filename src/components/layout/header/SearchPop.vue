@@ -2,28 +2,31 @@
   <el-popover
     popper-style="max-width:auto;padding:0;"
     width="250px"
-    v-model:visible="showSearchView"
-    trigger="click"
+    :visible="showSearchView"
+    trigger="manual"
   >
     <template #reference>
       <el-input
+        class="pr-4"
         placeholder="搜索音乐、MV、歌单"
         :prefix-icon="Search"
+        clearable
         v-model="searchKeyword"
         @input="searchInput"
+        @focus="handleFocus"
         @blur="showSearchView = false"
       />
     </template>
-    <div class="h-96">
+    <div class="h-96 bg-view">
       <el-scrollbar>
         <div class="pb-2.5">
           <div v-if="showHot">
-            <div class="pt-2 pb-1.5 px-2.5">热门搜索</div>
+            <div class="pt-2 pb-1.5 px-2.5 text-main">热门搜索</div>
             <div>
               <div
                 v-for="(item, index) in searchHot"
                 :key="item.searchWord"
-                class="py-2.5 px-1.5 hover-text cursor-pointer flex justify-between items-center text-xs"
+                class="py-2.5 px-2.5 hover-text cursor-pointer flex justify-between items-center text-main text-xs"
                 @click="hotClick(item.searchWord)"
               >
                 <div>
@@ -55,7 +58,7 @@ import { debounce } from 'lodash'
 import SearchSuggest from '@/components/layout/header/SearchSuggest.vue'
 
 const { showSearchView, searchKeyword, showHot } = storeToRefs(useSearchStore())
-const { suggest } = useSearchStore()
+const { suggest, handleFocus } = useSearchStore()
 
 const searchInput = debounce((value: string | number) => suggest(), 500, { maxWait: 1000 })
 
@@ -74,5 +77,8 @@ onMounted(async () => {
 <style scoped lang="scss">
 :deep(.el-input__prefix-inner) {
   font-size: 14px;
+}
+:deep(.el-input-inner) {
+  padding-right: 31px;
 }
 </style>

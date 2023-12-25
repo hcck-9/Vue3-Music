@@ -2,6 +2,7 @@ import type { Song } from '@/models/song'
 import type { SongUrl } from '@/models/songUrl'
 import { useSongDetail, useSongUrl } from '@/utils/api'
 import { defineStore, storeToRefs } from 'pinia'
+import { onMounted, onUnmounted, watch } from 'vue'
 
 const KEYS = {
   volume: 'PLAYER-VOLUME'
@@ -26,7 +27,7 @@ export const usePlayerStore = defineStore({
       // 是否播放中
       isPlaying: false,
       // 是否暂停
-      isPause: false,
+      isPause: true,
       // 是否正在拖动进度条
       sliderInput: false,
       // 是否播放结束
@@ -66,6 +67,10 @@ export const usePlayerStore = defineStore({
     }
   },
   actions: {
+    // 初始化
+    init() {
+      this.audio.volume = this.volume / 100
+    },
     // 播放列表里面添加音乐
     pushPlayList(replace: boolean, ...list: Song[]) {
       if (replace) {
@@ -75,7 +80,7 @@ export const usePlayerStore = defineStore({
       list.forEach((song) => {
         if (
           this.playList.filter((s) => {
-            s.id == song.id
+            return s.id === song.id
           }).length <= 0
         ) {
           this.playList.push(song)
@@ -111,6 +116,7 @@ export const usePlayerStore = defineStore({
         .play()
         .then((res) => {
           this.isPlaying = true
+          this.isPause = false
           this.songUrl = data
           this.url = data.url
           this.id = id
@@ -166,7 +172,6 @@ export const usePlayerStore = defineStore({
     // 播放/暂停
     togglePlay() {
       if (!this.song.id) return
-      this.isPlaying = !this.isPlaying
       if (this.isPlaying) {
         this.audio.pause()
         this.isPause = true
@@ -174,6 +179,7 @@ export const usePlayerStore = defineStore({
         this.audio.play()
         this.isPause = false
       }
+      this.isPlaying = !this.isPlaying
     },
     // 切换循环
     toggleLoop() {
@@ -191,6 +197,47 @@ export const usePlayerStore = defineStore({
       this.volume = n
       this.audio.volume = n / 100
       localStorage.setItem(KEYS.volume, n.toString())
+    },
+    // 修改播放时间
+    onSliderChange(val: number) {
+      this.currentTime = val
+      this.sliderInput = false
+      this.audio.currentTime = val
+    },
+    // 播放时间拖动中
+    onSliderInput(val: number) {
+      this.sliderInput = true
+    },
+    // 定时器
+    interval() {
+      if (this.isPlaying && !this.sliderInput) {
+        this.currentTime = parseInt(this.audio.currentTime.toString())
+        this.duration = parseInt(this.audio.duration.toString())
+        this.ended = this.audio.ended
+      }
     }
   }
 })
+
+export const usePlayerInit = () => {
+  let timer: NodeJS.Timer
+  const { init, playEnd, interval } = usePlayerStore()
+  const { ended } = storeToRefs(usePlayerStore())
+
+  // 监听播放结束
+  watch(ended, (ended) => {
+    if (!ended) return
+    playEnd()
+  })
+  // 启动定时器
+  onMounted(() => {
+    init()
+    console.log('启动定时器')
+    timer = setInterval(interval, 1000)
+  })
+  // 清除定时器
+  onUnmounted(() => {
+    console.log('清除定时器')
+    clearInterval(Number(timer))
+  })
+}

@@ -7,14 +7,15 @@
       class="hover-text"
       @click="toggleLoop"
     />
-    <IconPark :icon="GoStart" size="28" theme="filled" class="hover-text" />
+    <IconPark :icon="GoStart" size="28" theme="filled" class="hover-text" @click="prev" />
     <IconPark
-      :icon="isPause ? PauseOne : Play"
+      :icon="isPause ? Play : PauseOne"
       size="45"
       theme="filled"
       class="hover-text text-emerald-400"
+      @click="togglePlay"
     />
-    <IconPark :icon="GoEnd" size="28" theme="filled" class="hover-text" />
+    <IconPark :icon="GoEnd" size="28" theme="filled" class="hover-text" @click="next" />
     <el-popover placement="top" width="150px">
       <template #reference>
         <IconPark :icon="VolumeSmall" size="20" :stroke-width="3" class="hover-text" />
