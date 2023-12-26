@@ -5,7 +5,15 @@ import { UserProfile } from '@/models/user'
 import { SongUrl } from '@/models/songUrl'
 import { Song } from '@/models/song'
 import { Banner } from '@/models/banner'
-import { Personalized, PersonalizedMv, PersonalizedNewSong } from '@/models/personalized'
+import {
+  PersonalizedDjProgram,
+  Personalized,
+  PersonalizedMv,
+  PersonalizedNewSong
+} from '@/models/personalized'
+import { PersonalizedPrivateContent } from '@/models/video'
+import { DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
+import { TopListDetail } from '@/models/toplist_detail'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -29,7 +37,7 @@ export async function useSongDetail(id: number) {
   return songs.first()
 }
 
-// 获取轮播图 banner
+// 获取 common 轮播图 banner
 export async function useBanner() {
   const { banners } = await instance.get<{ banners: Banner[] }>('/banner', { type: 1 })
   return banners
@@ -65,4 +73,52 @@ export async function usePersonalizedNewSong() {
 export async function usePersonalizedMv() {
   const { result } = await instance.get<{ result: PersonalizedMv[] }>('/personalized/mv')
   return result
+}
+
+// 获取推荐DJ
+export async function usePersonalizedDjProgram() {
+  const { result } = await instance.get<{ result: PersonalizedDjProgram[] }>(
+    '/personalized/djprogram'
+  )
+  return result
+}
+
+// 获取独家放送歌曲
+export async function usePersonalizedPrivateContentList(limit: number = 10, offset: number = 0) {
+  const { result } = await instance.get<{ result: PersonalizedPrivateContent[] }>(
+    '/personalized/privatecontent/list',
+    {
+      limit: limit,
+
+      offset: offset
+    }
+  )
+  return result
+}
+
+// 获取DJ轮播图 banner
+export async function useDJBanner() {
+  const { data } = await instance.get<{ data: Banner[] }>('/dj/banner')
+  return data
+}
+
+// 获取DJ 个性化推荐
+export async function useDJPersonalizedRecommened() {
+  const { data } = await instance.get<{ data: DJPersonalizedRecommend[] }>(
+    '/dj/personalize/recommend'
+  )
+  return data
+}
+
+// 获取DJ 今日优选
+export async function useDJTodayPreferred() {
+  const { data } = await instance.get<{ data: DJTodayPreferred[] }>('/dj/today/perfered')
+  return data
+}
+useTopListDetail
+
+// 获取榜单内容摘要
+export async function useTopListDetail() {
+  const { list } = await instance.get<{ list: TopListDetail[] }>('/toplist/detail')
+  return list
 }

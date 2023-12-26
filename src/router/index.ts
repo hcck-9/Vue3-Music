@@ -18,6 +18,77 @@ const router = createRouter({
             menu: 'discover',
             keepAlive: true
           }
+        },
+        {
+          path: 'music',
+          name: Pages.music,
+          component: () => import('@/views/music/Music.vue'),
+          redirect: { name: Pages.picked },
+          meta: {
+            menu: 'music'
+          },
+          children: [
+            {
+              path: 'picked',
+              name: Pages.picked,
+              component: () => import('@/views/music/picked/Picked.vue'),
+              meta: {
+                menu: 'music',
+                title: '精选',
+                keepAlive: true
+              }
+            },
+            {
+              path: 'dj',
+              name: Pages.dj,
+              component: () => import('@/views/music/dj/DJ.vue'),
+              meta: {
+                menu: 'music',
+                title: '有声电台',
+                keepAlive: true
+              }
+            },
+            {
+              path: 'toplist',
+              name: Pages.toplist,
+              component: () => import('@/views/music/toplist/TopList.vue'),
+              meta: {
+                menu: 'music',
+                title: '排行',
+                keepAlive: true
+              }
+            },
+            {
+              path: 'artists',
+              name: Pages.artists,
+              component: () => import('@/views/music/artists/Artists.vue'),
+              meta: {
+                menu: 'music',
+                title: '歌手',
+                keepAlive: true
+              }
+            },
+            {
+              path: 'category',
+              name: Pages.category,
+              component: () => import('@/views/music/category/Category.vue'),
+              meta: {
+                menu: 'music',
+                title: '分类歌单',
+                keepAlive: true
+              }
+            },
+            {
+              path: 'album',
+              name: Pages.album,
+              component: () => import('@/views/music/album/Album.vue'),
+              meta: {
+                menu: 'music',
+                title: '数字专辑',
+                keepAlive: true
+              }
+            }
+          ]
         }
       ]
     }

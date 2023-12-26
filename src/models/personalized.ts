@@ -229,7 +229,7 @@ export interface PersonalizedMv {
   artistId: number
   alg: string
 }
-export interface DjProgram {
+export interface PersonalizedDjProgram {
   id: number
   type: number
   name: string

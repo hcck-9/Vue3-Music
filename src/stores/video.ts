@@ -1,5 +1,6 @@
 import { PersonalizedMv } from '@/models/personalized'
-import { usePersonalizedMv } from '@/utils/api'
+import { PersonalizedPrivateContent } from '@/models/video'
+import { usePersonalizedMv, usePersonalizedPrivateContentList } from '@/utils/api'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -12,8 +13,16 @@ export const useVideoStore = defineStore('mv', () => {
     personalizedMv.value = await usePersonalizedMv()
   }
 
+  // 独家放送歌曲
+  const personalizedPrivateContent = ref<PersonalizedPrivateContent[]>([])
+  const getPersonalizedPrivateContent = async () => {
+    if (personalizedPrivateContent.value.length) return
+    personalizedPrivateContent.value = await usePersonalizedPrivateContentList(4)
+  }
   return {
     personalizedMv,
-    getPersonalizedMv
+    getPersonalizedMv,
+    personalizedPrivateContent,
+    getPersonalizedPrivateContent
   }
 })

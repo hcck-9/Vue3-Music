@@ -9,7 +9,7 @@
       </div>
       <div class="flex-1 overflow-hidden">
         <el-scrollbar>
-          <div class="container mx-auto">
+          <div class="container min-w-[600px] mx-auto">
             <router-view></router-view>
           </div>
         </el-scrollbar>
@@ -32,4 +32,8 @@ import { usePlayerInit } from '@/stores/player'
 usePlayerInit()
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.container {
+  margin: 0 !important;
+}
+</style>

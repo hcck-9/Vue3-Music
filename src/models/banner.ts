@@ -3,5 +3,5 @@ export interface Banner {
   targetId: number
   targetType: number
   typeTitle: string
-  bannerId: number
+  bannerId?: number
 }

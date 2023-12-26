@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-14 items-center justify-between drag">
-    <div class="flex pl-5 items-center flex-shrink-0 mr-10">
+    <div class="flex pl-5 items-center flex-shrink-0">
       <IconPark
         :icon="Left"
         :size="iconSize"

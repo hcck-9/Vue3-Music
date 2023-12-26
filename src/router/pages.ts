@@ -5,7 +5,7 @@ export const Pages = {
   picked: 'picked',
   toplist: 'toplist',
   category: 'category',
-  artist: 'artist',
+  artists: 'artists',
   playlist: 'playlist',
   artistDetail: 'artistDetail',
   mvDetail: 'mvDetail',
