@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title title="推荐新音乐" />
+    <Title title="推荐新音乐" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-2 2xl:grid-cols-5 gap-y-2.5 gap-x-5 cursor-pointer">
       <div
         v-for="(item, index) in personalizedNewSong"

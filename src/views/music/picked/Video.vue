@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title title="独家放送" />
+    <Title title="独家放送" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5">
       <div v-for="item in personalizedPrivateContent" :key="item.id">
         <CoverPlay :pic-url="item.sPicUrl" :name="item.name" video />

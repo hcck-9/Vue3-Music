@@ -3,7 +3,7 @@
     <h1 class="text-3xl font-bold pt-8 pb-4">音乐馆</h1>
     <el-affix :offset="56" target=".music">
       <div class="bg-view">
-        <el-tabs v-model="currentMenu" class="demo-tabs text-main" @tab-click="onTabClick">
+        <el-tabs v-model="currentMenu" class="demo-tabs text-main w-fit" @tab-click="onTabClick">
           <el-tab-pane
             v-for="menu in menus"
             :key="menu.name"

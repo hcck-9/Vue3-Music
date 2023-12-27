@@ -22,7 +22,7 @@ export function useMusicMenu() {
     },
     {
       label: '歌手',
-      name: 'artist'
+      name: 'artists'
     },
     {
       label: '分类歌单',

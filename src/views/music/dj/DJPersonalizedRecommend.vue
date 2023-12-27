@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title title="电台个性推荐" />
+    <Title title="电台个性推荐" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-6 gap-5">
       <div v-for="item in DJPersonalizedRecommened" :key="item.id">
         <CoverPlay :pic-url="item.picUrl" :name="item.name" :play-count="0" />

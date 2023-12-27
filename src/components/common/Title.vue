@@ -1,7 +1,7 @@
 <template>
   <div class="flex mt-2 py-2 text-xl items-center">
     <div>{{ title }}</div>
-    <IconPark :icon="Right" size="25" :stroke-width="2" />
+    <IconPark :icon="Right" size="25" :stroke-width="2" v-if="hasRight" />
   </div>
 </template>
 
@@ -11,6 +11,7 @@ import IconPark from '@/components/common/IconPark.vue'
 
 defineProps<{
   title: string
+  hasRight?: boolean
 }>()
 </script>
 

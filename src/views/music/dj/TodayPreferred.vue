@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title title="今日优选" />
+    <Title title="今日优选" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-1 lg:grid-cols-3 gap-5">
       <div v-for="item in DJTodayPreferred" :key="item.id">
         <CoverPlay :pic-url="item.picUrl" :name="item.name" :play-count="item.playCount" />

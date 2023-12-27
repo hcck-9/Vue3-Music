@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title title="推荐MV" />
+    <Title title="推荐MV" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5">
       <div v-for="item in personalizedMv" :key="item.id">
         <CoverPlay

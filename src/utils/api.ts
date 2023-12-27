@@ -14,6 +14,9 @@ import {
 import { PersonalizedPrivateContent } from '@/models/video'
 import { DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
 import { TopListDetail } from '@/models/toplist_detail'
+import { Artist } from '@/models/artist'
+import { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
+import { AlbumHotNewProduct, AlbumLanguageStyle } from '@/models/album'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -121,4 +124,65 @@ useTopListDetail
 export async function useTopListDetail() {
   const { list } = await instance.get<{ list: TopListDetail[] }>('/toplist/detail')
   return list
+}
+
+// 获取歌手列表
+export async function useArtistList(pageData: {
+  type: number
+  area: number
+  initial: string
+  limit: number
+  page: number
+}) {
+  const { artists } = await instance.get<{ artists: Artist[] }>('/artist/list', {
+    type: pageData.type,
+    area: pageData.area,
+    initial: pageData.initial,
+    limit: pageData.limit,
+    offset: (pageData.page - 1) * pageData.limit
+  })
+  return artists
+}
+
+// 获取分类歌单精选标签数据
+export async function usePlaylistHighqualityTags() {
+  const { tags } = await instance.get<{ tags: PlaylistHighqualityTag[] }>(
+    '/playlist/highquality/tags'
+  )
+  return tags
+}
+
+// 获取分类歌单精选标签对应歌曲列表
+export async function useTopPlaylistHighquality(params?: {
+  cat: string
+  limit?: number
+  before?: number
+}) {
+  return await instance.get<{
+    playlists: PlayListDetail[]
+    total: number
+    more: boolean
+    lasttime: number
+  }>('/top/playlist/highquality', params)
+}
+
+// 获取热门新碟数据
+export async function useHotNewAlbum() {
+  const { products } = await instance.get<{ products: AlbumHotNewProduct[] }>('/album/list', {
+    limit: 10
+  })
+  return products
+}
+
+// 根据语种风格获取全部新碟
+export async function useAllNewAlbun(pageData: { area: string; limit: number; page: number }) {
+  const { albumProducts, hasNextPage } = await instance.get<{
+    albumProducts: AlbumLanguageStyle[]
+    hasNextPage: boolean
+  }>('/album/list/style', {
+    area: pageData.area,
+    limit: pageData.limit,
+    offset: (pageData.page - 1) * pageData.limit
+  })
+  return { albumProducts, hasNextPage }
 }
