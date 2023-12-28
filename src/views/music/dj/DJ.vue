@@ -12,8 +12,3 @@ import TodayPreferred from '@/views/music/dj/TodayPreferred.vue'
 </script>
 
 <style scoped lang="scss"></style>
-<!-- 电台 - 分类 -->
-<!-- 电台 - 分类推荐 -->
-<!-- 电台 - 推荐类型 -->
-<!-- 热门电台 -->
-DJPersonalizedRecommend

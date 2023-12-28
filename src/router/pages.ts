@@ -11,5 +11,6 @@ export const Pages = {
   mvDetail: 'mvDetail',
   album: 'album',
   video: 'video',
-  dj: 'dj'
+  dj: 'dj',
+  radar: 'radar'
 }

@@ -1,6 +1,10 @@
 import { PersonalizedMv } from '@/models/personalized'
-import { PersonalizedPrivateContent } from '@/models/video'
-import { usePersonalizedMv, usePersonalizedPrivateContentList } from '@/utils/api'
+import { PersonalizedPrivateContent, VideoGroup } from '@/models/video'
+import {
+  usePersonalizedMv,
+  usePersonalizedPrivateContentList,
+  useVideoGroupList
+} from '@/utils/api'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -19,10 +23,19 @@ export const useVideoStore = defineStore('mv', () => {
     if (personalizedPrivateContent.value.length) return
     personalizedPrivateContent.value = await usePersonalizedPrivateContentList(4)
   }
+
+  const videoGroup = ref<VideoGroup[]>([])
+  const getVideoGroup = async () => {
+    if (videoGroup.value.length) return
+    videoGroup.value = await useVideoGroupList()
+  }
+
   return {
     personalizedMv,
     getPersonalizedMv,
     personalizedPrivateContent,
-    getPersonalizedPrivateContent
+    getPersonalizedPrivateContent,
+    videoGroup,
+    getVideoGroup
   }
 })

@@ -48,7 +48,7 @@ export function useMenu() {
         },
         {
           name: '电台',
-          key: 'dj',
+          key: 'radar',
           icon: Fm,
           theme: 'outline'
         }

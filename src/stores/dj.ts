@@ -3,10 +3,11 @@ import { ref } from 'vue'
 import {
   useDJPersonalizedRecommened,
   useDJTodayPreferred,
-  usePersonalizedDjProgram
+  usePersonalizedDjProgram,
+  useDJCategory
 } from '@/utils/api'
 import type { PersonalizedDjProgram } from '@/models/personalized'
-import type { DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
+import type { DJCategory, DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
 
 export const useDJStore = defineStore('dj', () => {
   // discover 电台推荐
@@ -30,12 +31,21 @@ export const useDJStore = defineStore('dj', () => {
     DJTodayPreferred.value = await useDJTodayPreferred()
   }
 
+  // radar DJ类别列表
+  const DJCategoryList = ref<DJCategory[]>([])
+  const getDJCategoryList = async () => {
+    if (DJCategoryList.value.length) return
+    DJCategoryList.value = await useDJCategory()
+  }
+
   return {
     personalizedDjProgram,
     getPersonalizedDjProgram,
     DJPersonalizedRecommened,
     getDJPersonalizedRecommened,
     DJTodayPreferred,
-    getDJTodayPreferred
+    getDJTodayPreferred,
+    DJCategoryList,
+    getDJCategoryList
   }
 })

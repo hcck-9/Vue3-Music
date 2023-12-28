@@ -11,8 +11,8 @@ import {
   PersonalizedMv,
   PersonalizedNewSong
 } from '@/models/personalized'
-import { PersonalizedPrivateContent } from '@/models/video'
-import { DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
+import { PersonalizedPrivateContent, Video, VideoGroup } from '@/models/video'
+import { DJCategory, DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
 import { TopListDetail } from '@/models/toplist_detail'
 import { Artist } from '@/models/artist'
 import { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
@@ -185,4 +185,28 @@ export async function useAllNewAlbun(pageData: { area: string; limit: number; pa
     offset: (pageData.page - 1) * pageData.limit
   })
   return { albumProducts, hasNextPage }
+}
+
+// 获取视频标签列表
+export async function useVideoGroupList() {
+  const { data } = await instance.get<{ data: VideoGroup[] }>('/video/group/list')
+  return data
+}
+
+// 依据 ID 获取 部分 或者 全部 视频
+export async function useVideoGroup(id?: number, offset?: number) {
+  const { datas } = await instance.get<{ datas: Video[] }>(
+    id ? '/video/group' : '/video/timeline/all',
+    {
+      id: id,
+      offset: offset
+    }
+  )
+  return datas
+}
+
+// radar 获取DJ分类类别
+export async function useDJCategory() {
+  const { categories } = await instance.get<{ categories: DJCategory[] }>('/dj/catelist')
+  return categories
 }

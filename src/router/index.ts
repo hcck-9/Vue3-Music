@@ -89,6 +89,23 @@ const router = createRouter({
               }
             }
           ]
+        },
+        {
+          path: 'video',
+          name: Pages.video,
+          component: () => import('@/views/video/Video.vue'),
+          meta: {
+            menu: 'video',
+            keepAlive: true
+          }
+        },
+        {
+          path: 'radar',
+          name: Pages.radar,
+          component: () => import('@/views/radar/Radar.vue'),
+          meta: {
+            menu: 'radar'
+          }
         }
       ]
     }
