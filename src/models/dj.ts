@@ -133,3 +133,259 @@ export type DJCategory = {
   name: string
   id: number
 }
+
+export interface MainSong {
+  name: string
+  id: number
+  position: number
+  alias: string[]
+  status: number
+  fee: number
+  copyrightId: number
+  disc: string
+  no: number
+  artists: Artist[]
+  album: Album
+  starred: boolean
+  popularity: number
+  score: number
+  starredNum: number
+  duration: number
+  playedNum: number
+  dayPlays: number
+  hearTime: number
+  ringtone?: string
+  crbt?: string
+  audition?: string
+  copyFrom: string
+  commentThreadId: string
+  rtUrl?: string
+  ftype: number
+  rtUrls: string[]
+  copyright: number
+  transName?: string
+  sign?: string
+  mark: number
+  noCopyrightRcmd?: string
+  mMusic?: Music
+  lMusic?: Music
+  bMusic?: Music
+  mp3Url?: string
+  rtype: number
+  rurl?: string
+  mvid: number
+  hMusic?: Music
+}
+
+export interface Artist {
+  name: string
+  id: number
+  picId: number
+  img1v1Id: number
+  briefDesc: string
+  picUrl: string
+  img1v1Url: string
+  albumSize: number
+  alias: string[]
+  trans: string
+  musicSize: number
+  topicPerson: number
+}
+
+export interface Album {
+  name: string
+  id: number
+  type?: string
+  size: number
+  picId: number
+  blurPicUrl?: string
+  companyId: number
+  pic: number
+  picUrl: string
+  publishTime: number
+  description: string
+  tags: string
+  company?: string
+  briefDesc: string
+  artist: Artist
+  songs: any[]
+  alias: string[]
+  status: number
+  copyrightId: number
+  commentThreadId: string
+  artists: Artist[]
+  subType?: String
+  transName?: string
+  mark: number
+  picId_str: string
+}
+
+export interface Music {
+  name?: string
+  id: number
+  size: number
+  extension: string
+  sr: number
+  dfsId: number
+  bitrate: number
+  playTime: number
+  volumeDelta: number
+}
+
+export interface DJ {
+  defaultAvatar: boolean
+  province: number
+  authStatus: number
+  followed: boolean
+  avatarUrl: string
+  accountStatus: number
+  gender: number
+  city: number
+  birthday: number
+  userId: number
+  userType: number
+  nickname: string
+  signature: string
+  description: string
+  detailDescription: string
+  avatarImgId: number
+  backgroundImgId: number
+  backgroundUrl: string
+  authority: number
+  mutual: boolean
+  expertTags?: any
+  experts?: any
+  djStatus: number
+  vipType: number
+  remarkName?: string
+  authenticationTypes: number
+  avatarDetail?: any
+  avatarImgIdStr: string
+  backgroundImgIdStr: string
+  anchor: boolean
+  avatarImgId_str: string
+  brand: string
+}
+
+export interface Program {
+  mainSong: MainSong
+  songs?: any[]
+  dj: DJ
+  blurCoverUrl: string
+  radio: Radio
+  duration: number
+  authDTO?: any
+  buyed: boolean
+  programDesc?: string
+  h5Links?: any
+  canReward: boolean
+  auditStatus: number
+  videoInfo?: any
+  score: number
+  liveInfo?: any
+  alg?: any
+  disPlayStatus?: any
+  auditDisPlayStatus: number
+  categoryName?: string
+  secondCategoryName?: string
+  existLyric: boolean
+  djPlayRecordVo?: any
+  recommended: boolean
+  icon?: any
+  additionIconList?: any
+  adIconInfo?: any
+  replaceVoiceId: number
+  replaceResource?: any
+  songTimeStamps?: any
+  coverUrl: string
+  reward: boolean
+  subscribedCount: number
+  privacy: boolean
+  trackCount: number
+  pubStatus: number
+  smallLanguageAuditStatus: number
+  secondCategoryId: number
+  bdAuditStatus: number
+  channels: any[]
+  categoryId: number
+  commentThreadId: string
+  createEventId: number
+  listenerCount: number
+  scheduledPublishTime: number
+  serialNum: number
+  coverId: number
+  titbitImages?: any
+  isPublish: boolean
+  programFeeType: number
+  mainTrackId: number
+  titbits?: any
+  feeScope: number
+  name: string
+  id: number
+  createTime: number
+  description: string
+  subscribed: boolean
+  shareCount: number
+  likedCount: number
+  commentCount: number
+}
+
+export interface Radio {
+  dj?: any
+  category: string
+  secondCategory: string
+  buyed: boolean
+  price: number
+  originalPrice: number
+  discountPrice?: any
+  purchaseCount: number
+  lastProgramName?: any
+  videos?: any
+  finished: boolean
+  underShelf: boolean
+  liveInfo?: any
+  playCount: number
+  privacy: boolean
+  icon?: any
+  manualTagsDTO?: any
+  descPicList?: any
+  replaceRadioId: number
+  replaceRadio?: any
+  lastProgramCreateTime: number
+  radioFeeType: number
+  intervenePicUrl: string
+  intervenePicId: number
+  dynamic: boolean
+  subCount: number
+  shortName?: any
+  picId: number
+  categoryId: number
+  taskId: number
+  programCount: number
+  picUrl: string
+  lastProgramId: number
+  feeScope: number
+  name: string
+  id: number
+  createTime: number
+  desc: string
+  subed: boolean
+}
+
+export interface DJHotRankItem {
+  program: Program
+  rank: number
+  lastRank: number
+  score: number
+  programFeeType: number
+}
+
+export interface DJRadioPaidPremium {
+  id: number
+  rank: number
+  lastRank: number
+  score: number
+  name: string
+  picUrl: string
+  creatorName: string
+}

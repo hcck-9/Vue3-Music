@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5">
+  <div class="px-5 min-w-[880px]">
     <div class="grid grid-flow-row sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-5 mt-5">
       <div
         v-for="category in DJCategoryList.slice(0, DJCategoryList.length - 1)"

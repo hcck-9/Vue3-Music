@@ -4,10 +4,18 @@ import {
   useDJPersonalizedRecommened,
   useDJTodayPreferred,
   usePersonalizedDjProgram,
-  useDJCategory
+  useDJCategory,
+  useDJTopList,
+  useDJRadioPaidPremium
 } from '@/utils/api'
 import type { PersonalizedDjProgram } from '@/models/personalized'
-import type { DJCategory, DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
+import type {
+  DJCategory,
+  DJHotRankItem,
+  DJPersonalizedRecommend,
+  DJTodayPreferred,
+  DJRadioPaidPremium
+} from '@/models/dj'
 
 export const useDJStore = defineStore('dj', () => {
   // discover 电台推荐
@@ -38,6 +46,20 @@ export const useDJStore = defineStore('dj', () => {
     DJCategoryList.value = await useDJCategory()
   }
 
+  // radar 节目排行榜
+  const DJTopList = ref<DJHotRankItem[]>([])
+  const getDJTopList = async () => {
+    if (DJTopList.value.length) return
+    DJTopList.value = await useDJTopList()
+  }
+
+  // radar 付费精品
+  const DJRadioPaidPremiumList = ref<DJRadioPaidPremium[]>([])
+  const getDJRadioPaidPremium = async () => {
+    if (DJRadioPaidPremiumList.value.length) return
+    DJRadioPaidPremiumList.value = await useDJRadioPaidPremium()
+  }
+
   return {
     personalizedDjProgram,
     getPersonalizedDjProgram,
@@ -46,6 +68,10 @@ export const useDJStore = defineStore('dj', () => {
     DJTodayPreferred,
     getDJTodayPreferred,
     DJCategoryList,
-    getDJCategoryList
+    getDJCategoryList,
+    DJTopList,
+    getDJTopList,
+    DJRadioPaidPremiumList,
+    getDJRadioPaidPremium
   }
 })

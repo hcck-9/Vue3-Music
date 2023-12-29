@@ -12,7 +12,13 @@ import {
   PersonalizedNewSong
 } from '@/models/personalized'
 import { PersonalizedPrivateContent, Video, VideoGroup } from '@/models/video'
-import { DJCategory, DJPersonalizedRecommend, DJTodayPreferred } from '@/models/dj'
+import {
+  DJCategory,
+  DJPersonalizedRecommend,
+  DJTodayPreferred,
+  DJHotRankItem,
+  DJRadioPaidPremium
+} from '@/models/dj'
 import { TopListDetail } from '@/models/toplist_detail'
 import { Artist } from '@/models/artist'
 import { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
@@ -209,4 +215,16 @@ export async function useVideoGroup(id?: number, offset?: number) {
 export async function useDJCategory() {
   const { categories } = await instance.get<{ categories: DJCategory[] }>('/dj/catelist')
   return categories
+}
+
+// radar 获取DJ节目排行榜
+export async function useDJTopList() {
+  const { toplist } = await instance.get<{ toplist: DJHotRankItem[] }>('/dj/program/toplist')
+  return toplist
+}
+
+// radar 获取DJ 电台 - 付费精品
+export async function useDJRadioPaidPremium() {
+  const { toplist } = await instance.get<{ toplist: DJRadioPaidPremium[] }>('/dj/toplist/pay')
+  return toplist
 }
