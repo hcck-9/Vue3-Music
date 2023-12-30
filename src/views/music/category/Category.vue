@@ -30,7 +30,7 @@ const list = ref<PlayListDetail[]>([])
 const pageData = reactive({
   init: false,
   loading: false,
-  limit: 30,
+  limit: 20,
   before: 0,
   more: false,
   cat: '全部'

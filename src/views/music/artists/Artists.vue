@@ -24,7 +24,19 @@
     </div>
   </div>
   <div class="grid grid-flow-row grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-5">
-    <div v-for="artist in artists" :key="artist.id" class="flex items-center flex-col">
+    <div
+      v-for="artist in artists"
+      :key="artist.id"
+      class="flex items-center flex-col"
+      @click="
+        router.push({
+          name: 'artistDetail',
+          query: {
+            id: artist.id
+          }
+        })
+      "
+    >
       <img
         :src="artist.img1v1Url"
         :alt="artist.name"
@@ -44,7 +56,8 @@
 import { Artist } from '@/models/artist'
 import { useArtistList } from '@/utils/api'
 import { onMounted, reactive, ref } from 'vue'
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const artists = ref<Artist[]>([])
 const pageData = reactive({
   init: false,
@@ -159,14 +172,8 @@ const options: {
 ]
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .active {
   @apply bg-emerald-400 text-white rounded;
-}
-.el-button.is-link {
-  color: var(--el-color-primary);
-  &:hover {
-    color: var(--el-color-primary-light-6);
-  }
 }
 </style>

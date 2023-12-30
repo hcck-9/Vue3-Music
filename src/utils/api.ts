@@ -5,24 +5,27 @@ import { UserProfile } from '@/models/user'
 import { SongUrl } from '@/models/songUrl'
 import { Song } from '@/models/song'
 import { Banner } from '@/models/banner'
-import {
+import type {
   PersonalizedDjProgram,
   Personalized,
   PersonalizedMv,
   PersonalizedNewSong
 } from '@/models/personalized'
-import { PersonalizedPrivateContent, Video, VideoGroup } from '@/models/video'
-import {
+import type { PersonalizedPrivateContent, Video, VideoGroup } from '@/models/video'
+import type {
   DJCategory,
   DJPersonalizedRecommend,
   DJTodayPreferred,
   DJHotRankItem,
-  DJRadioPaidPremium
+  DJRadioPaidPremium,
+  DJNewExcellent,
+  Album
 } from '@/models/dj'
-import { TopListDetail } from '@/models/toplist_detail'
-import { Artist } from '@/models/artist'
-import { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
-import { AlbumHotNewProduct, AlbumLanguageStyle } from '@/models/album'
+import type { TopListDetail } from '@/models/toplist_detail'
+import type { Artist, Mv } from '@/models/artist'
+import type { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
+import type { AlbumHotNewProduct, AlbumLanguageStyle } from '@/models/album'
+import type { ArtistDesc, ArtistDetail } from '@/models/artist_detail'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -225,6 +228,95 @@ export async function useDJTopList() {
 
 // radar 获取DJ 电台 - 付费精品
 export async function useDJRadioPaidPremium() {
-  const { toplist } = await instance.get<{ toplist: DJRadioPaidPremium[] }>('/dj/toplist/pay')
-  return toplist
+  const {
+    data: { list }
+  } = await instance.get<{
+    data: { list: DJRadioPaidPremium[] }
+  }>('/dj/toplist/pay')
+  return list
+}
+
+// radar 获取DJ节目排行榜
+export async function useDJNewExcellent(type: number) {
+  const { djRadios } = await instance.get<{ djRadios: DJNewExcellent[] }>('/dj/recommend/type', {
+    type: type
+  })
+  return djRadios
+}
+
+// radar 获取DJ节目排行榜
+export async function useDJCategoryPopularRadio(type: number, limit: number, page: number) {
+  const { djRadios } = await instance.get<{ djRadios: DJNewExcellent[] }>('/dj/radio/hot', {
+    cateId: type,
+    limit: limit,
+    offset: (page - 1) * limit
+  })
+  return djRadios
+}
+
+// artistDetail 获取歌手详情 id
+export async function useArtistDetail(id: number) {
+  const { data } = await instance.get<{ data: ArtistDetail }>('/artist/detail', {
+    id: id
+  })
+  return data
+}
+
+// song 获取歌手全部歌曲
+export async function useArtistSongs(
+  id: number,
+  order: string = 'time',
+  limit: number = 10,
+  offset: number = 0
+) {
+  return await instance.get<{ songs: Song[] }>('/artist/songs', {
+    id: id,
+    order: order,
+    limit: limit,
+    offset: offset
+  })
+}
+
+// song 获取歌手全部专辑
+export async function useArtistAlbum(id: number, limit: number = 10, offset: number = 0) {
+  return await instance.get<{ hotAlbums: Album[] }>('/artist/album', {
+    id: id,
+    limit: limit,
+    offset: offset
+  })
+}
+
+// song 获取歌手全部视频
+export async function useArtistMv(id: number, limit: number = 10, offset: number = 0) {
+  return await instance.get<{ mvs: Mv[] }>('/artist/mv', {
+    id: id,
+    limit: limit,
+    offset: offset
+  })
+}
+
+// song 获取歌手全部描述
+export async function useArtistDesc(id: number) {
+  return await instance.get<ArtistDesc>('/artist/desc', {
+    id: id
+  })
+}
+
+// playlist 获取歌单详情，包括获取所有的歌曲
+export async function usePlayListDetail(id: number, s: number = 8) {
+  const { playlist } = await instance.get<{ playlist: PlayListDetail }>('/playlist/detail', {
+    id: id,
+    s: s
+  })
+
+  return playlist
+}
+
+// playlist 获取歌单详情所有的歌曲
+export async function usePlayListTrackAll(id: number, s: number = 8) {
+  const { songs } = await instance.get<{ songs: Song[] }>('/playlist/track/all', {
+    id: id
+  })
+
+  return songs
 }

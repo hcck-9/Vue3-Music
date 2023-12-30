@@ -9,8 +9,11 @@ export const Pages = {
   playlist: 'playlist',
   artistDetail: 'artistDetail',
   mvDetail: 'mvDetail',
+  // music下专辑
   album: 'album',
   video: 'video',
   dj: 'dj',
-  radar: 'radar'
+  radar: 'radar',
+  // 专辑页面
+  albumItem: 'albumItem'
 }

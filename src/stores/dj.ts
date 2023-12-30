@@ -6,7 +6,9 @@ import {
   usePersonalizedDjProgram,
   useDJCategory,
   useDJTopList,
-  useDJRadioPaidPremium
+  useDJRadioPaidPremium,
+  useDJNewExcellent,
+  useDJCategoryPopularRadio
 } from '@/utils/api'
 import type { PersonalizedDjProgram } from '@/models/personalized'
 import type {
@@ -14,7 +16,8 @@ import type {
   DJHotRankItem,
   DJPersonalizedRecommend,
   DJTodayPreferred,
-  DJRadioPaidPremium
+  DJRadioPaidPremium,
+  DJNewExcellent
 } from '@/models/dj'
 
 export const useDJStore = defineStore('dj', () => {
@@ -60,18 +63,41 @@ export const useDJStore = defineStore('dj', () => {
     DJRadioPaidPremiumList.value = await useDJRadioPaidPremium()
   }
 
+  // radar 分类推荐
+  const DJNewExcellentList = ref<DJNewExcellent[]>([])
+  const getDJNewExcellentList = async (type: number) => {
+    DJNewExcellentList.value = await useDJNewExcellent(type)
+  }
+
+  // radar 类别热门电台
+  const DJCategoryPopularRadioList = ref<DJNewExcellent[]>([])
+  const getDJCategoryPopularRadioList = async (type: number, limit: number, page: number) => {
+    DJCategoryPopularRadioList.value = await useDJCategoryPopularRadio(type, limit, page)
+  }
+
   return {
     personalizedDjProgram,
     getPersonalizedDjProgram,
+
     DJPersonalizedRecommened,
     getDJPersonalizedRecommened,
+
     DJTodayPreferred,
     getDJTodayPreferred,
+
     DJCategoryList,
     getDJCategoryList,
+
     DJTopList,
     getDJTopList,
+
     DJRadioPaidPremiumList,
-    getDJRadioPaidPremium
+    getDJRadioPaidPremium,
+
+    DJNewExcellentList,
+    getDJNewExcellentList,
+
+    DJCategoryPopularRadioList,
+    getDJCategoryPopularRadioList
   }
 })

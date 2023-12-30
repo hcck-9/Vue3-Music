@@ -264,7 +264,7 @@ export interface DJ {
   backgroundImgIdStr: string
   anchor: boolean
   avatarImgId_str: string
-  brand: string
+  brand?: string
 }
 
 export interface Program {
@@ -388,4 +388,48 @@ export interface DJRadioPaidPremium {
   name: string
   picUrl: string
   creatorName: string
+}
+
+export interface DJNewExcellent {
+  dj: DJ
+  category: string
+  secondCategory: string
+  buyed: boolean
+  price: number
+  originalPrice: number
+  discountPrice?: number
+  purchaseCount: number
+  lastProgramName: string
+  videos?: any[]
+  finished: boolean
+  underShelf: boolean
+  liveInfo?: any
+  playCount: number
+  privacy: boolean
+  icon?: any
+  manualTagsDTO?: any
+  descPicList?: any[]
+  replaceRadioId: number
+  replaceRadio: any
+  radioFeeType: number
+  intervenePicUrl: string
+  intervenePicId: number
+  dynamic: boolean
+  categoryId: number
+  taskId: number
+  picId: number
+  picUrl: string
+  lastProgramCreateTime: number
+  shortName?: string
+  programCount: number
+  subCount: number
+  lastProgramId: number
+  feeScope: number
+  name: string
+  id: number
+  desc: string
+  createTime: number
+  rcmdtext: string
+  subed: boolean
+  lastUpdateProgramName: string
 }

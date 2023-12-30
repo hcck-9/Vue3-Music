@@ -32,13 +32,14 @@ import DjProgramList from '@/views/radar/DjProgramList.vue'
 import DjCategoryTopList from '@/views/radar/DjCategoryTopList.vue'
 
 const { DJCategoryList } = toRefs(useDJStore())
-const { getDJCategoryList } = useDJStore()
+const { getDJCategoryList, getDJNewExcellentList, getDJCategoryPopularRadioList } = useDJStore()
 
 const pageData = reactive({
   init: false,
   loading: false,
+  more: false,
   page: 1,
-  limit: 60,
+  limit: 30,
   type: 0,
   top: true
 })
@@ -48,6 +49,8 @@ const typeChange = (type: number) => {
   console.log(type)
   pageData.top = false
   pageData.type = type
+  getDJNewExcellentList(pageData.type)
+  getDJCategoryPopularRadioList(pageData.type, pageData.limit, pageData.page)
 }
 
 onMounted(async () => {

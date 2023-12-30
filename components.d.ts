@@ -16,6 +16,7 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElImage: typeof import('element-plus/es')['ElImage']
@@ -33,6 +34,7 @@ declare module 'vue' {
     IconPark: typeof import('./src/components/common/IconPark.vue')['default']
     Menu: typeof import('./src/components/layout/menu/Menu.vue')['default']
     MenuList: typeof import('./src/components/layout/menu/MenuList.vue')['default']
+    MoreText: typeof import('./src/components/common/MoreText.vue')['default']
     PlayerAction: typeof import('./src/components/layout/footer/PlayerAction.vue')['default']
     PlayerController: typeof import('./src/components/layout/footer/PlayerController.vue')['default']
     PlayerSlider: typeof import('./src/components/layout/footer/PlayerSlider.vue')['default']
@@ -44,7 +46,11 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchPop: typeof import('./src/components/layout/header/SearchPop.vue')['default']
     SearchSuggest: typeof import('./src/components/layout/header/SearchSuggest.vue')['default']
+    SongListItem: typeof import('./src/components/common/SongListItem.vue')['default']
     Title: typeof import('./src/components/common/Title.vue')['default']
     UserInfo: typeof import('./src/components/layout/header/UserInfo.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

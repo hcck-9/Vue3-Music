@@ -2,7 +2,18 @@
   <div>
     <Title title="你的专属歌单" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-5 gap-5 2xl:grid-cols-10">
-      <div v-for="(item, index) in personalized.sampleSize(10)" :key="index">
+      <div
+        v-for="(item, index) in personalized.sampleSize(10)"
+        :key="index"
+        @click="
+          router.push({
+            name: 'playlist',
+            query: {
+              id: item.id
+            }
+          })
+        "
+      >
         <CoverPlay
           :name="item.name"
           :pic-url="item.picUrl"
@@ -20,6 +31,9 @@ import Title from '@/components/common/Title.vue'
 import CoverPlay from '@/components/common/CoverPlay.vue'
 import { useMusicStore } from '@/stores/music'
 import { onMounted, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { id } from 'element-plus/es/locale'
+const router = useRouter()
 
 const { personalized } = toRefs(useMusicStore())
 

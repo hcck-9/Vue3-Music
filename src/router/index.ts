@@ -106,6 +106,21 @@ const router = createRouter({
           meta: {
             menu: 'radar'
           }
+        },
+        {
+          path: 'playlist',
+          name: Pages.playlist,
+          component: () => import('@/views/playlist/PlayList.vue')
+        },
+        {
+          path: 'artistDetail',
+          name: Pages.artistDetail,
+          component: () => import('@/views/artist/ArtistDetail.vue')
+        },
+        {
+          path: 'albumItem',
+          name: Pages.albumItem,
+          component: () => import('@/views/artist/AlbumItem.vue')
         }
       ]
     }
