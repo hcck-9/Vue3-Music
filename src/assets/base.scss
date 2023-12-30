@@ -65,3 +65,10 @@ body {
 .el-tabs__header {
   @apply m-0;
 }
+
+.el-button.is-link {
+  color: var(--el-color-primary);
+  &:hover {
+    color: var(--el-color-primary-light-6);
+  }
+}

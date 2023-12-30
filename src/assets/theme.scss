@@ -41,7 +41,7 @@
 }
 
 .button {
-  @apply flex bg-emerald-600 rounded-full justify-center items-center h-8 text-sm transition-all;
+  @apply flex bg-emerald-500 rounded-full justify-center items-center h-8 text-sm transition-all;
   @apply text-white;
   @apply hover:bg-emerald-700;
 }

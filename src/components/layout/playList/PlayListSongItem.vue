@@ -17,8 +17,10 @@
             class="ml-2 text-orange-400 cursor-pointer"
             size="16"
             :icon="Youtube"
+            @click="router.push({ name: 'mvDetail', query: { id: song.mv } })"
           />
         </div>
+        <div class="truncate">{{ song.ar.first().name }}</div>
       </div>
       <div class="flex-shrink-0 ml-5 flex items-center justify-end">
         <div class="truncate">

@@ -42,6 +42,7 @@ export interface Song {
   cp: number
   mv: number
   publishTime: number
+  videoInfo?: any
 }
 
 export interface SongAr {
