@@ -26,6 +26,7 @@ import type { Artist, Mv } from '@/models/artist'
 import type { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
 import type { AlbumHotNewProduct, AlbumLanguageStyle } from '@/models/album'
 import type { ArtistDesc, ArtistDetail } from '@/models/artist_detail'
+import { PlayListComment } from '@/models/comment'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -313,10 +314,29 @@ export async function usePlayListDetail(id: number, s: number = 8) {
 }
 
 // playlist 获取歌单详情所有的歌曲
-export async function usePlayListTrackAll(id: number, s: number = 8) {
+export async function usePlayListTrackAll(id: number) {
   const { songs } = await instance.get<{ songs: Song[] }>('/playlist/track/all', {
     id: id
   })
 
   return songs
+}
+
+// playlist 获取歌单评论
+export async function usePlayListComment(id: number, limit: number = 20, page: number = 1) {
+  const { comments, total, more } = await instance.get<{
+    comments: PlayListComment[]
+    total: number
+    more: boolean
+  }>('/comment/playlist', {
+    id: id,
+    limit: limit,
+    offset: (page - 1) * limit
+  })
+
+  return {
+    comments,
+    total,
+    more
+  }
 }

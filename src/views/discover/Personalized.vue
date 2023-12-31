@@ -32,7 +32,6 @@ import CoverPlay from '@/components/common/CoverPlay.vue'
 import { useMusicStore } from '@/stores/music'
 import { onMounted, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
-import { id } from 'element-plus/es/locale'
 const router = useRouter()
 
 const { personalized } = toRefs(useMusicStore())
