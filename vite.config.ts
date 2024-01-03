@@ -35,7 +35,7 @@ export default defineConfig({
       usePolling: true
     }
   },
-  //base:'/vue3-music/',
+  base: '/Vue3-Music/',
   build: {
     outDir: 'docs'
   }
