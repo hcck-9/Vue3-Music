@@ -130,7 +130,7 @@ const router = createRouter({
         {
           path: 'albumDetail',
           name: Pages.albumDetail,
-          component: () => import('@/views/album/AlbumDetail.vue')
+          component: () => import('@/views/album/albumDetail.vue')
         }
       ]
     }
