@@ -47,7 +47,7 @@ export function useMenu() {
           theme: 'outline'
         },
         {
-          name: '电台',
+          name: '雷达',
           key: 'radar',
           icon: Fm,
           theme: 'outline'

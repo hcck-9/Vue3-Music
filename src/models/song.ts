@@ -3,8 +3,9 @@ export interface Song {
   id: number
   pst: number
   t: number
-  ar: SongAr[]
-  alia: string[]
+  ar?: SongAr[]
+  artists?: SongAr[]
+  alias?: SongAr[]
   pop: number
   st: number
   rt?: any
@@ -12,8 +13,10 @@ export interface Song {
   v: number
   crbt?: any
   cf: string
-  al: SongAl
-  dt: number
+  al?: SongAl
+  album?: SongAl
+  dt?: number
+  duration?: number
   h: SongH
   m: SongM
   l: SongL
@@ -48,8 +51,8 @@ export interface Song {
 export interface SongAr {
   id: number
   name: string
-  tns: any[]
-  alias: any[]
+  tns?: any[]
+  alias?: any[]
 }
 
 export interface SongAl {

@@ -1,11 +1,11 @@
 <template>
   <div class="mt-2">
-    <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-5 gap-5 2xl:grid-cols-8">
+    <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-5 gap-5 2xl:grid-cols-10">
       <div
         v-for="(item, index) in list"
         :key="item.id"
         :class="{ 'item-1': index === 0 }"
-        @click="router.push({ name: 'mvDetail', query: { id: item.id } })"
+        @click="router.push({ name: Pages.mvDetail, query: { id: item.id } })"
       >
         <CoverPlay
           :name="item.name"
@@ -31,6 +31,7 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { useArtistMv } from '@/utils/api'
 import { useRouter } from 'vue-router'
 import type { Mv } from '@/models/artist'
+import { Pages } from '@/router/pages'
 
 const router = useRouter()
 const props = defineProps<{ id: number }>()

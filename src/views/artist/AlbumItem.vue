@@ -1,11 +1,11 @@
 <template>
   <div class="mt-2">
-    <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-5 gap-5 2xl:grid-cols-8">
+    <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-5 gap-5 2xl:grid-cols-10">
       <div
         v-for="(item, index) in list"
         :key="item.id"
         :class="{ 'item-1': index === 0 }"
-        @click="router.push({ name: 'album', query: { id: item.id } })"
+        @click="router.push({ name: Pages.albumDetail, query: { id: item.id } })"
       >
         <CoverPlay :name="item.name" :pic-url="item.picUrl" :play-count="0" />
         <div class="text-xs mt-2 truncate">{{ item.name }}</div>
@@ -21,11 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Album } from '@/models/dj'
+import type { Album } from '@/models/album'
 import CoverPlay from '@/components/common/CoverPlay.vue'
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useArtistAlbum } from '@/utils/api'
 import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
 
 const router = useRouter()
 const props = defineProps<{ id: number }>()

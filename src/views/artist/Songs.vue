@@ -39,7 +39,7 @@
     </div>
     <div class="text-sm">
       <template v-for="song in songList" :key="song.id">
-        <SongListItem :show-ar-name="false" show-al-name :song="song" />
+        <SongListItem :show-ar-name="false" show-al-name :song="song" :dj="false" />
       </template>
     </div>
     <div class="flex justify-center py-5" v-if="songList.length > 0 && !pageData.noMore">

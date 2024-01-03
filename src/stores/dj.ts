@@ -50,10 +50,20 @@ export const useDJStore = defineStore('dj', () => {
   }
 
   // radar 节目排行榜
-  const DJTopList = ref<DJHotRankItem[]>([])
+  const DJTopList = ref<DJRadioPaidPremium[]>([])
   const getDJTopList = async () => {
     if (DJTopList.value.length) return
-    DJTopList.value = await useDJTopList()
+    const dataList = ref<DJHotRankItem[]>([])
+    dataList.value = await useDJTopList()
+    DJTopList.value = dataList.value.slice(0, 11).map((item) => ({
+      id: item.program.id,
+      rank: item.rank,
+      lastRank: item.lastRank,
+      score: item.score,
+      name: item.program.mainSong.name,
+      picUrl: item.program.coverUrl,
+      creatorName: item.program.dj.brand
+    }))
   }
 
   // radar 付费精品

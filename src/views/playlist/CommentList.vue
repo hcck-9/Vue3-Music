@@ -22,16 +22,19 @@
         </div>
       </div>
     </div>
-    <div class="text-sm mt-2">
-      <template v-for="comment in playlistCommentList" :key="comment.commentId">
-        <CommentItem :comment="comment" />
-      </template>
+    <div v-if="playlistCommentList.length" class="flex flex-col">
+      <div class="text-sm mt-2">
+        <template v-for="comment in playlistCommentList" :key="comment.commentId">
+          <CommentItem :comment="comment" />
+        </template>
+      </div>
+      <div class="flex justify-center py-5" v-if="more">
+        <el-button link class="text-center w-full" @click="loadMore" :loading="loading"
+          >加载更多</el-button
+        >
+      </div>
     </div>
-    <div class="flex justify-center py-5" v-if="more">
-      <el-button link class="text-center w-full" @click="loadMore" :loading="loading"
-        >加载更多</el-button
-      >
-    </div>
+    <div v-else class="text-center mt-5 text-slate-400 text-xs">暂无评论</div>
   </div>
 </template>
 

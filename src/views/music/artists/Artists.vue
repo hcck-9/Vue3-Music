@@ -30,7 +30,7 @@
       class="flex items-center flex-col"
       @click="
         router.push({
-          name: 'artistDetail',
+          name: Pages.artistDetail,
           query: {
             id: artist.id
           }
@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { Artist } from '@/models/artist'
+import { Pages } from '@/router/pages'
 import { useArtistList } from '@/utils/api'
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'

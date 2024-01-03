@@ -118,9 +118,19 @@ const router = createRouter({
           component: () => import('@/views/artist/ArtistDetail.vue')
         },
         {
-          path: 'albumItem',
-          name: Pages.albumItem,
-          component: () => import('@/views/artist/AlbumItem.vue')
+          path: 'mvDetail',
+          name: Pages.mvDetail,
+          component: () => import('@/views/mv/mvDetail.vue')
+        },
+        {
+          path: 'djDetail',
+          name: Pages.djDetail,
+          component: () => import('@/views/dj/DJDetail.vue')
+        },
+        {
+          path: 'albumDetail',
+          name: Pages.albumDetail,
+          component: () => import('@/views/album/albumDetail.vue')
         }
       ]
     }

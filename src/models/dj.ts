@@ -176,49 +176,9 @@ export interface MainSong {
   mvid: number
   hMusic?: Music
 }
+import type { Artist } from '@/models/artist'
 
-export interface Artist {
-  name: string
-  id: number
-  picId: number
-  img1v1Id: number
-  briefDesc: string
-  picUrl: string
-  img1v1Url: string
-  albumSize: number
-  alias: string[]
-  trans: string
-  musicSize: number
-  topicPerson: number
-}
-
-export interface Album {
-  name: string
-  id: number
-  type?: string
-  size: number
-  picId: number
-  blurPicUrl?: string
-  companyId: number
-  pic: number
-  picUrl: string
-  publishTime: number
-  description: string
-  tags: string
-  company?: string
-  briefDesc: string
-  artist: Artist
-  songs: any[]
-  alias: string[]
-  status: number
-  copyrightId: number
-  commentThreadId: string
-  artists: Artist[]
-  subType?: String
-  transName?: string
-  mark: number
-  picId_str: string
-}
+import type { Album } from '@/models/album'
 
 export interface Music {
   name?: string
@@ -263,8 +223,10 @@ export interface DJ {
   avatarImgIdStr: string
   backgroundImgIdStr: string
   anchor: boolean
-  avatarImgId_str: string
+  avatarImgId_str?: string
   brand?: string
+  rewardCount?: number
+  canReward?: boolean
 }
 
 export interface Program {

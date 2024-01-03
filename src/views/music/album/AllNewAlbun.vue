@@ -11,7 +11,12 @@
     </div>
   </div>
   <div class="grid grid-flow-row grid-cols-5 xl:grid-cols-10 gap-5">
-    <div v-for="album in allHotNerAlbum" :key="album.albumId" class="flex flex-col">
+    <div
+      v-for="album in allHotNerAlbum"
+      :key="album.albumId"
+      class="flex flex-col"
+      @click="router.push({ name: Pages.albumDetail, query: { id: album.albumId } })"
+    >
       <CoverPlay :name="album.albumName" :pic-url="album.coverUrl" :play-count="0" />
       <div class="mt-2 text-xs text-main truncate">{{ album.albumName }}</div>
       <div class="mt-2 text-main text-xs text-dc">{{ album.artistName }}</div>
@@ -29,6 +34,10 @@ import Title from '@/components/common/Title.vue'
 import { AlbumLanguageStyle } from '@/models/album'
 import { useAllNewAlbun } from '@/utils/api'
 import { onMounted, reactive, ref } from 'vue'
+
+import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
+const router = useRouter()
 
 const allHotNerAlbum = ref<AlbumLanguageStyle[]>([])
 const pageData = reactive({

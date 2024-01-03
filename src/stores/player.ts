@@ -208,6 +208,19 @@ export const usePlayerStore = defineStore({
     onSliderInput(val: number) {
       this.sliderInput = true
     },
+    // video 播放和暂停
+    setPlay() {
+      if (!this.song.id) return
+      this.isPlaying = true
+      this.audio.play()
+      this.isPause = false
+    },
+    setPause() {
+      if (!this.song.id) return
+      this.isPlaying = false
+      this.audio.pause()
+      this.isPause = true
+    },
     // 定时器
     interval() {
       if (this.isPlaying && !this.sliderInput) {

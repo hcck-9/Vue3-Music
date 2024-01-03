@@ -62,6 +62,9 @@ import Title from '@/components/common/Title.vue'
 import { useDJStore } from '@/stores/dj'
 import { onMounted, ref, toRefs } from 'vue'
 import { DJRadioPaidPremium } from '@/models/dj'
+import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
+const router = useRouter()
 
 const props = defineProps<{
   hot: boolean
@@ -78,20 +81,7 @@ onMounted(async () => {
   if (props.hot) {
     await getDJTopList()
     score.value = DJTopList.value[0].score
-    let number = 0
-    for (const item of DJTopList.value) {
-      const data = {
-        id: item.program.id,
-        rank: item.rank,
-        lastRank: item.lastRank,
-        score: item.score,
-        name: item.program.mainSong.name,
-        picUrl: item.program.coverUrl,
-        creatorName: item.program.dj.brand
-      }
-      dataList.value.push(data)
-      if (number++ > 10) break
-    }
+    dataList.value = DJTopList.value
   } else {
     await getDJRadioPaidPremium()
     score.value = DJRadioPaidPremiumList.value[0].score

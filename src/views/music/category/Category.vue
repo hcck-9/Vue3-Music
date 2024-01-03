@@ -2,7 +2,11 @@
   <PlaylistHot @cat-change="catChange" />
   <div class="py-5 text-xl">{{ pageData.cat }}歌单</div>
   <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-6 gap-5">
-    <div v-for="item in list" :key="item.id">
+    <div
+      v-for="item in list"
+      :key="item.id"
+      @click="router.push({ name: Pages.playlist, query: { id: item.id } })"
+    >
       <CoverPlay
         :pic-url="item.coverImgUrl"
         :name="item.name"
@@ -25,12 +29,14 @@ import { PlayListDetail } from '@/models/playlist'
 import { onMounted, reactive, ref } from 'vue'
 import PlaylistHot from '@/views/music/category/PlaylistHot.vue'
 import { useTopPlaylistHighquality } from '@/utils/api'
-
+import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
+const router = useRouter()
 const list = ref<PlayListDetail[]>([])
 const pageData = reactive({
   init: false,
   loading: false,
-  limit: 20,
+  limit: 30,
   before: 0,
   more: false,
   cat: '全部'
@@ -52,7 +58,7 @@ const getData = async () => {
       before: pageData.before,
       cat: pageData.cat
     })
-    if (pageData.before === 1) {
+    if (pageData.before <= 0) {
       list.value = playlists
     } else {
       list.value.push(...playlists)

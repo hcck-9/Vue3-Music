@@ -19,14 +19,15 @@ import type {
   DJHotRankItem,
   DJRadioPaidPremium,
   DJNewExcellent,
-  Album
+  Program
 } from '@/models/dj'
 import type { TopListDetail } from '@/models/toplist_detail'
 import type { Artist, Mv } from '@/models/artist'
 import type { PlayListDetail, PlaylistHighqualityTag } from '@/models/playlist'
-import type { AlbumHotNewProduct, AlbumLanguageStyle } from '@/models/album'
+import type { Album, AlbumHotNewProduct, AlbumLanguageStyle } from '@/models/album'
 import type { ArtistDesc, ArtistDetail } from '@/models/artist_detail'
-import { PlayListComment } from '@/models/comment'
+import type { PlayListComment } from '@/models/comment'
+import type { MvDetail, MvUrl } from '@/models/mv'
 
 // 手机登录
 export async function useLogin(phone: string, password: string) {
@@ -339,4 +340,55 @@ export async function usePlayListComment(id: number, limit: number = 20, page: n
     total,
     more
   }
+}
+
+// albumDetail 获取专辑评论
+export async function useAlbumComment(id: number, limit: number = 20, page: number = 1) {
+  const { comments, total, more } = await instance.get<{
+    comments: PlayListComment[]
+    total: number
+    more: boolean
+  }>('/comment/album', {
+    id: id,
+    limit: limit,
+    offset: (page - 1) * limit
+  })
+
+  return {
+    comments,
+    total,
+    more
+  }
+}
+
+// mvDetail 获取mv地址
+export async function useMvUrl(id: number) {
+  const { data } = await instance.get<{ data: MvUrl }>('/mv/url', {
+    id: id
+  })
+
+  return data
+}
+
+// mvDetail 获取mv详情
+export async function useMvDetail(id: number) {
+  const { data } = await instance.get<{ data: MvDetail }>('/mv/detail', {
+    mvid: id
+  })
+  return data
+}
+
+// djDetail 获取dj详情
+export async function useDJDetail(id: number) {
+  const { program } = await instance.get<{ program: Program }>('/dj/program/detail', {
+    id: id
+  })
+  return program
+}
+
+// 获取专辑信息
+export async function useAlbum(id: number) {
+  const { album, songs } = await instance.get<{ album: Album; songs: Song[] }>('album', { id: id })
+
+  return { album, songs }
 }

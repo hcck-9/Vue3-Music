@@ -2,7 +2,11 @@
   <div>
     <Title title="独家放送" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5">
-      <div v-for="item in personalizedPrivateContent" :key="item.id">
+      <div
+        v-for="item in personalizedPrivateContent"
+        :key="item.id"
+        @click="router.push({ name: Pages.mvDetail, query: { id: item.id } })"
+      >
         <CoverPlay :pic-url="item.sPicUrl" :name="item.name" video />
         <div class="truncate text-xs mt-2">{{ item.name }}</div>
       </div>
@@ -16,6 +20,7 @@ import { onMounted, toRefs } from 'vue'
 import CoverPlay from '@/components/common/CoverPlay.vue'
 import { useVideoStore } from '@/stores/video'
 import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
 const router = useRouter()
 
 const { personalizedPrivateContent } = toRefs(useVideoStore())

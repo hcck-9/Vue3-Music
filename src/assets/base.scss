@@ -67,8 +67,8 @@ body {
 }
 
 .el-button.is-link {
-  color: var(--el-color-primary);
+  color: var(--el-color-primary) !important;
   &:hover {
-    color: var(--el-color-primary-light-6);
+    color: var(--el-color-primary-light-6) !important;
   }
 }

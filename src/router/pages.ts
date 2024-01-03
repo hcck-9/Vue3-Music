@@ -14,6 +14,8 @@ export const Pages = {
   video: 'video',
   dj: 'dj',
   radar: 'radar',
-  // 专辑页面
-  albumItem: 'albumItem'
+  // 电台详情页面
+  djDetail: 'djDetail',
+  // 专辑详情页面
+  albumDetail: 'albumDetail'
 }

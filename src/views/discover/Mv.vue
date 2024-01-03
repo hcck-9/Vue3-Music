@@ -2,7 +2,18 @@
   <div>
     <Title title="推荐MV" :hasRight="true" />
     <div class="grid grid-flow-row grid-cols-2 lg:grid-cols-4 gap-5">
-      <div v-for="item in personalizedMv" :key="item.id">
+      <div
+        v-for="item in personalizedMv"
+        :key="item.id"
+        @click="
+          router.push({
+            name: Pages.mvDetail,
+            query: {
+              id: item.id
+            }
+          })
+        "
+      >
         <CoverPlay
           video
           :name="item.name"
@@ -24,10 +35,13 @@ import Title from '@/components/common/Title.vue'
 import { onMounted, toRefs } from 'vue'
 import CoverPlay from '@/components/common/CoverPlay.vue'
 import { useVideoStore } from '@/stores/video'
-
+import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
 const { personalizedMv } = toRefs(useVideoStore())
 
 const { getPersonalizedMv } = useVideoStore()
+
+const router = useRouter()
 
 onMounted(() => {
   getPersonalizedMv()

@@ -40,7 +40,11 @@
       </div>
     </div>
     <div class="grid grid-flow-row grid-cols-3 gap-5 mt-5">
-      <div v-for="({ data }, index) in videoList" :key="index">
+      <div
+        v-for="({ data }, index) in videoList"
+        :key="index"
+        @click="router.push({ name: Pages.mvDetail, query: { id: data.vid } })"
+      >
         <CoverPlay :pic-url="data.coverUrl" video />
         <div class="text-xs mt-3 truncate">{{ data.title }}</div>
       </div>
@@ -55,6 +59,9 @@ import { onMounted, reactive, ref, toRefs } from 'vue'
 import { useVideoStore } from '@/stores/video'
 import { Video } from '@/models/video'
 import { useVideoGroup } from '@/utils/api'
+import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
+const router = useRouter()
 
 const { videoGroup } = toRefs(useVideoStore())
 const { getVideoGroup } = useVideoStore()
@@ -68,6 +75,7 @@ const videoList = ref<Video[]>([])
 
 const getData = async () => {
   videoList.value = await useVideoGroup(pageData.id, pageData.page - 1)
+  console.log(videoList.value)
 }
 
 const idChange = (id: number) => {
@@ -78,9 +86,9 @@ const idChange = (id: number) => {
   getData()
 }
 
-onMounted(() => {
-  getVideoGroup()
-  getData()
+onMounted(async () => {
+  await getVideoGroup()
+  await getData()
 })
 </script>
 

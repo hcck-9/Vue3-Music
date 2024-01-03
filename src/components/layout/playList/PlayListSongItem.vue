@@ -5,7 +5,7 @@
   >
     <el-image
       lazy
-      :src="song.al?.picUrl + '?param=80y80'"
+      :src="song.al?.picUrl ? song.al?.picUrl + '?param=80y80' : OpticalDisk"
       class="w-10 flex-shrink-0 aspect-square"
     />
     <div class="ml-2 text-xs h-10 flex flex-1 w-1">
@@ -17,14 +17,16 @@
             class="ml-2 text-orange-400 cursor-pointer"
             size="16"
             :icon="Youtube"
-            @click="router.push({ name: 'mvDetail', query: { id: song.mv } })"
+            @click="router.push({ name: Pages.mvDetail, query: { id: song.mv } })"
           />
         </div>
-        <div class="truncate">{{ song.ar.first().name }}</div>
+        <div class="truncate">{{ song.artists?.first().name || song.ar?.first().name }}</div>
       </div>
       <div class="flex-shrink-0 ml-5 flex items-center justify-end">
         <div class="truncate">
-          <small>{{ useFormatDuring(song.dt / 1000) }}</small>
+          <small>{{
+            song.duration ? useFormatDuring(song.duration / 1000) : useFormatDuring(song.dt / 1000)
+          }}</small>
         </div>
       </div>
     </div>
@@ -38,6 +40,7 @@ import { Youtube } from '@icon-park/vue-next'
 import { useRouter } from 'vue-router'
 import { useFormatDuring } from '@/utils/number'
 import { Pages } from '@/router/pages'
+import { OpticalDisk } from '@/assets/img'
 
 const router = useRouter()
 defineProps<{

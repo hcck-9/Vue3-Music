@@ -19,6 +19,7 @@
           :icon="PlayTwo"
           size="16"
           class="ml-2 text-orange-400 cursor-pointer"
+          @click="router.push({ name: Pages.mvDetail, query: { id: song.mv } })"
         />
       </div>
       <div class="hidden icon-action flex-shrink-0">
@@ -53,12 +54,12 @@
           class="truncate max-w-full hover-text"
           @click="
             router.push({
-              name: 'artistDetail',
-              query: { id: song.ar.first().id }
+              name: Pages.artistDetail,
+              query: { id: props.dj ? song.artists.first().id : song.ar.first().id }
             })
           "
         >
-          {{ song.ar.first().name }}
+          {{ props.dj ? song.artists.first().name : song.ar.first().name }}
         </small>
       </div>
     </div>
@@ -72,18 +73,20 @@
           class="truncate max-w-full hover-text"
           @click="
             router.push({
-              name: 'albumItem',
-              query: { id: song.al.id }
+              name: Pages.albumDetail,
+              query: { id: props.dj ? song.album.id : song.al.id }
             })
           "
         >
-          {{ song.al.name }}
+          {{ props.dj ? song.album.name : song.al.name }}
         </small>
       </div>
     </div>
     <div class="w-20 flex-shrink-0">
       <div class="w-20 truncate">
-        <small>{{ useFormatDuring(song.dt / 1000) }}</small>
+        <small>{{
+          props.dj ? useFormatDuring(song.duration / 1000) : useFormatDuring(song.dt / 1000)
+        }}</small>
       </div>
     </div>
   </div>
@@ -97,12 +100,14 @@ import type { Song } from '@/models/song'
 import { usePlayerStore } from '@/stores/player'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { Pages } from '@/router/pages'
 
 const router = useRouter()
-defineProps<{
+const props = defineProps<{
   song: Song
   showArName?: boolean
   showAlName?: boolean
+  dj?: boolean
 }>()
 
 const { play } = usePlayerStore()
